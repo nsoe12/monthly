@@ -57,4 +57,18 @@ function sendNaverUserInfoToServer(userVo) {
         .catch(error => {
             console.error('An error occurred while sending Naver login information:', error);
         });
+
+    // 네이버 API 정보 초기화
+    function naverLogout() {
+        var naverLogin = new naver.LoginWithNaverId({
+            clientId: "ZyZIG611nSR6a00ApfSc", // 내 애플리케이션 정보에 clientId를 입력해줍니다.
+            callbackUrl: "http://localhost:10000/board/main", // 내 애플리케이션 API 설정의 Callback URL을 입력해줍니다.
+            isPopup: false,
+            callbackHandle: true
+        });
+
+        naverLogin.init();
+
+        naverLogin.logout();
+    }
 }
