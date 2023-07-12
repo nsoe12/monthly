@@ -1,11 +1,9 @@
-var naverLogin = new naver.LoginWithNaverId(
-    {
-        clientId: "ZyZIG611nSR6a00ApfSc", //내 애플리케이션 정보에 cliendId를 입력해줍니다.
-        callbackUrl: "http://localhost:10000/board/main", // 내 애플리케이션 API설정의 Callback URL 을 입력해줍니다.
-        isPopup: false,
-        callbackHandle: true
-    }
-);
+var naverLogin = new naver.LoginWithNaverId({
+    clientId: "ZyZIG611nSR6a00ApfSc", // 내 애플리케이션 정보에 cliendId를 입력해줍니다.
+    callbackUrl: "http://localhost:10000/board/main", // 내 애플리케이션 API설정의 Callback URL 을 입력해줍니다.
+    isPopup: false,
+    callbackHandle: true
+});
 
 naverLogin.init();
 
@@ -20,7 +18,7 @@ window.addEventListener('load', function () {
             }
 
             // 유저 정보를 서버로 전송
-            console.log(naverLogin.user)
+            console.log(naverLogin.user);
             sendNaverUserInfoToServer(naverLogin.user);
         } else {
             console.log("callback 처리에 실패하였습니다.");
@@ -57,18 +55,27 @@ function sendNaverUserInfoToServer(userVo) {
         .catch(error => {
             console.error('An error occurred while sending Naver login information:', error);
         });
+}
 
-    // 네이버 API 정보 초기화
-    function naverLogout() {
-        var naverLogin = new naver.LoginWithNaverId({
-            clientId: "ZyZIG611nSR6a00ApfSc", // 내 애플리케이션 정보에 clientId를 입력해줍니다.
-            callbackUrl: "http://localhost:10000/board/main", // 내 애플리케이션 API 설정의 Callback URL을 입력해줍니다.
+// 네이버 API 정보 초기화
+function naverLogout() {
+    var naver_id_login = new naver.LoginWithNaverId(
+        {
+            clientId: "ZyZIG611nSR6a00ApfSc", // 내 애플리케이션 정보에 cliendId를 입력해줍니다.
+            callbackUrl: "http://localhost:10000/board/main", // 내 애플리케이션 API설정의 Callback URL 을 입력해줍니다.
             isPopup: false,
             callbackHandle: true
-        });
-
-        naverLogin.init();
-
-        naverLogin.logout();
-    }
+        }
+    );
+    naver_id_login.logout();
+    console.log('Naver API 정보 초기화 완료');
 }
+
+// 로그아웃 버튼 클릭 이벤트 처리
+var logoutButton = document.getElementById('logoutButton');
+logoutButton.addEventListener('click', function () {
+    // 네이버 API 정보 초기화 함수 호출
+    naverLogout();
+    // 로그아웃 후 페이지 이동 등의 동작 수행
+    window.location.href = 'http://localhost:10000/board/main';
+});

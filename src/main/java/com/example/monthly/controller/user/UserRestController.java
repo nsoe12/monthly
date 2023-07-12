@@ -8,7 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @RequiredArgsConstructor
@@ -84,19 +86,16 @@ public class UserRestController {
 
             // 클라이언트에서 네이버 API 정보 초기화를 위한 스크립트 실행
             String naverLogoutScript = "<script>\n" +
-                    "    function naverLogout() {\n" +
-                    "        var naverLogin = new naver.LoginWithNaverId({\n" +
-                    "            clientId: 'ZyZIG611nSR6a00ApfSc',\n" +
-                    "            callbackUrl: 'http://localhost:10000/board/main',\n" +
-                    "            isPopup: false,\n" +
-                    "            callbackHandle: true\n" +
-                    "        });\n" +
+                    "    var naverLogin = new naver.LoginWithNaverId({\n" +
+                    "        clientId: 'ZyZIG611nSR6a00ApfSc',\n" +
+                    "        callbackUrl: 'http://localhost:10000/board/main',\n" +
+                    "        isPopup: false,\n" +
+                    "        callbackHandle: true\n" +
+                    "    });\n" +
                     "\n" +
-                    "        naverLogin.init();\n" +
+                    "    naverLogin.init();\n" +
                     "\n" +
-                    "        naverLogin.logout();\n" +
-                    "    }\n" +
-                    "    naverLogout();\n" +
+                    "    naverLogin.logout();\n" +
                     "</script>";
             request.setAttribute("naverLogoutScript", naverLogoutScript);
 
