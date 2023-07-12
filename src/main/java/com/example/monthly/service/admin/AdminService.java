@@ -87,6 +87,8 @@ public Long findAdminNumber(String adminId, String adminPassword){
         return adminMapper.selectSeller(searchVo,criteria);
     }
     public int sellerGetTotal(SearchVo searchVo){
+        System.out.println("=============검색할게요=======================");
+        System.out.println(searchVo);
           return adminMapper.sellerGetTotal(searchVo);
     } //전체 갯수 페이징 뽑기
 
