@@ -37,22 +37,19 @@ th:nth-child(1){
   width: 20px;
 }
 th:nth-child(2){
-  width: 30px;
+  width: 70px;
 }
 th:nth-child(6){
   width: 70px;
 }
 th:nth-child(7){
-  width: 50px;
+  width: 60px;
 }
 th:nth-child(8){
-  width: 80px;
+  width: 180px;
 }
 
 th:nth-child(9){
-  width: 250px;
-}
-th:nth-child(10){
   width: 30px;
 }
 

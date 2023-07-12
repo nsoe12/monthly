@@ -1,6 +1,9 @@
 import * as search from '../module/adminSearch.js';
-
 //모듈 경로는 일반적으로 상대경로로 접근한다.
+let page = 1;
+let searchInput = '';
+let searchSelect = '';
+let period = '';
 
 function showList(map) {
     console.log(map);
@@ -31,11 +34,94 @@ function showList(map) {
             <td><button type="button" class="save-btn">save</button></td>
         </tr>`;
     });
-    $('.seller-list-body').html(list);
 
+    //====================
+    //페이지버튼
+    let pageBox ='';
+    if(map.pageVo.prev==true){
+        pageBox +=`
+      <a>
+          <li class="page-num prev" value="${map.pageVo.startPage -1}>&lt</li>
+        </a>
+      `;
+    }
+    for(let i=map.pageVo.startPage; i<=map.pageVo.endPage; i++){
+        if(i==map.pageVo.criteria.page){
+            pageBox +=`
+          <a>
+          <li class="page-num active">${i}</li>
+          </a>
+          `;
+        }else{
+            pageBox +=`
+          <a><li class="page-num">${i}</li></a>
+          `;
+        }
+    }
+    if(map.pageVo.next==true){
+        pageBox +=`
+      <a><li class="page-num next" value="${map.pageVo.endPage +1}">&gt</li></a>
+      `;
+    }
+
+    $('.seller-list-body').html(list); //=============
+    $('.page-box').html(pageBox);
 
 }
-search.getList({period : '', searchSelect : '', searchInput:''}, showList, showError);
+// search.getList({period : '', searchSelect : '', searchInput:''}, showList, showError);
+
+//페이징 처리 =====================================================================
+
+//페이지버튼을 눌렀을 때
+$('.page-box').on('click','.page-num',function(){
+
+    if($(this).hasClass('next')){
+        return;
+    }
+    if($(this).hasClass('prev')){
+        return;
+    }
+    let page = $(this).text();
+
+    let searchVo ={
+        "page":page,
+        "searchInput":searchInput,
+        "searchSelect":searchSelect,
+        "period":period
+    }
+    search.getList(searchVo,showList);
+
+});
+// 이전버튼 눌렀을 때
+$('.page-box').on('click','.prev',function(){
+    let page=$(this).val();
+    let searchVo ={
+        "page":page,
+        "searchInput":searchInput,
+        "searchSelect":searchSelect,
+        "period":period
+    }
+    search.getList(searchVo,showList);
+
+});
+//다음버튼 눌렀을 때
+$('.page-box').on('click','.next',function(e){
+    e.preventDefault();
+    let page=$(this).val();
+    let searchVo ={
+        "page":page,
+        "searchInput":searchInput,
+        "searchSelect":searchSelect,
+        "period":period
+    }
+    search.getList(searchVo,showList);
+
+});
+//================================================================================
+
+
+
+
 
 //구독자 페이지로 버튼 누르면 이동
 $('.seller-list-body').on('click','.brand-link',function (){
