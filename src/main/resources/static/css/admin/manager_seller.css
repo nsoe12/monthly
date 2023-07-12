@@ -178,3 +178,31 @@ td{
   margin: 5px;
   display: none;
 }
+
+
+/*페이징*/
+.page-container{
+  margin-top:30px;
+}
+.page-box{
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.page-num{
+  border: 1px solid #dce8ee;
+  width : 30px;
+  height: 40px;
+  border-radius: 5px;
+  margin: 0 10px;
+  text-align: center;
+  line-height: 40px;
+  color: white;
+  background-color:#dce8ee;
+  cursor:pointer;
+}
+.active,
+.page-num:hover{
+  background-color: #8eb4c8;
+}

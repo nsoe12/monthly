@@ -2,20 +2,20 @@
 //이 모듈을 밖에서 사용할 수 있도록 내보내는 키워드가 export이다.
 
 //판매자 검색 기능 모듈
-export function getList(obj, callback,error){
-    $.ajax({
-        url : '/search/sellers',
-        type : 'get',
-        data : obj,
-        dataType : 'json',
-        success : function(map){
-            if(callback){
-        callback(map);
-            }
-        },
-        error : error
-    });
-}
+// export function getList(obj, callback,error){
+//     $.ajax({
+//         url : '/search/sellers',
+//         type : 'get',
+//         data : obj,
+//         dataType : 'json',
+//         success : function(map){
+//             if(callback){
+//         callback(map);
+//             }
+//         },
+//         error : error
+//     });
+// }
 //판매자 검색후 상태변경 기능 모듈
 export function sellerStatusAjax(statusObj,error) {
     $.ajax({
@@ -65,7 +65,19 @@ export function getUserList(ul, callback,error){
         error : error
     });
 }
-
+//회원 검색후 상태변경 기능 모듈
+export function userStatusAjax(userObj,error) {
+    $.ajax({
+        url: `/search/users/${userObj.userStatus}`,
+        type: 'patch',
+        data:  JSON.stringify(userObj),
+        contentType : 'application/json; charset=utf-8',
+        success: function(){
+            console.log('회원상태변경 ajax연결 성공');
+        },
+        error:error
+    });
+}
 
 
 
@@ -84,6 +96,14 @@ export function productStatusAjax(pstObj,error){
         error:error
     });
 }
+
+
+
+
+
+
+
+//=============================================================
 
 
 //판매자의 구독자 페이지 검색 후 구독자 리스트 모듈
@@ -120,7 +140,21 @@ export function removeSubs(subsNumber,callback,error){
 }
 
 
-
+export function getList(searchVo,callback,error){
+    $.ajax({
+        url : `/search/sellers/${searchVo.page}`,
+        type : 'get',
+        data : searchVo,
+        dataType : 'json',
+        success : function(result){
+            if(callback){
+                console.log(result);
+                callback(result)
+            }
+        },
+        error:error
+    });
+}
 
 
 
