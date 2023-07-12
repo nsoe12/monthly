@@ -75,7 +75,7 @@
     <delete id="subsDelete">
         DELETE
         FROM MONTHLY_SUBSCRIBE
-        WHERE PRODUCT_NUMBER = #{productNumber}
+        WHERE PRODUCT_NUMBER = #{productNumber} AND USER_NUMBER = #{userNumber}
     </delete>
 
 <!--    내부구독 삭제를 위한 상품 번호 검색-->

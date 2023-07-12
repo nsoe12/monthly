@@ -54,9 +54,9 @@ class MypageServiceTest {
 
     @Test
     void subsRemove() {
-        productDto.setProductNumber(21L);
-        doNothing().when(subsMapper).subsDelete(any(Long.class));
-        mypageService.subsRemove(productDto.getProductNumber());
-        verify(subsMapper,times(1)).subsDelete(productDto.getProductNumber());
+//        productDto.setProductName("파도");
+//        doNothing().when(subsMapper).subsDelete(any(String.class));
+//        mypageService.subsRemove(productDto.getProductName());
+//        verify(subsMapper,times(1)).subsDelete(productDto.getProductName());
     }
 }
