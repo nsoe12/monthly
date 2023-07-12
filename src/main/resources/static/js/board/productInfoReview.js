@@ -158,7 +158,7 @@ $('.commentInput-buttonComplete').on('click',function(){
 
    review.add(reviewObj,
        function (){
-        review.getListPage({productNumber : productNumber, page : page},showReply(),showError());
+        review.getListPage({productNumber : productNumber, page : page},showReply,showError);
 
        },showError());
 
