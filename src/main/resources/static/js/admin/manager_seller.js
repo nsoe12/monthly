@@ -1,9 +1,24 @@
 import * as search from '../module/adminSearch.js';
+
 //모듈 경로는 일반적으로 상대경로로 접근한다.
 let page = 1;
 let searchInput = '';
 let searchSelect = '';
 let period = '';
+$(function (){
+    searchInput = $('.search-input').val();
+    searchSelect = $('.search-dropdown').val();
+    period = $('input[name="period"]:checked').val();
+    let searchVo ={
+        "page":page,
+        "searchInput":searchInput,
+        "searchSelect":searchSelect,
+        "period":period
+    }
+    console.log(searchVo);
+    search.getList(searchVo,showList,showError);
+})
+
 
 function showList(map) {
     console.log(map);
@@ -101,7 +116,7 @@ $('.page-box').on('click','.prev',function(){
         "searchSelect":searchSelect,
         "period":period
     }
-    search.getList(searchVo,showList);
+    search.getList(searchVo,showList,showError);
 
 });
 //다음버튼 눌렀을 때
@@ -114,7 +129,7 @@ $('.page-box').on('click','.next',function(e){
         "searchSelect":searchSelect,
         "period":period
     }
-    search.getList(searchVo,showList);
+    search.getList(searchVo,showList,showError);
 
 });
 //================================================================================
@@ -140,13 +155,20 @@ function showError(a, b, c) {
 $('.search-btn').on('click', function (){
     let searchInput = $('.search-input').val();
     let searchSelect = $('.search-dropdown').val();
-    let searchPeriod = $('input[name=period]:checked').val();
-    search.getList({period : searchPeriod, searchSelect : searchSelect, searchInput:searchInput}, showList, showError);
-    if(searchInput==null){
-        $('input[name=period]:checked').val('');
-    }else{
-        $('.search-input').val('');
+    let period = $('input[name=period]:checked').val();
+
+    let searchVo ={
+        "page":page,
+        "searchInput":searchInput,
+        "searchSelect":searchSelect,
+        "period":period
     }
+    search.getList(searchVo, showList, showError);
+    // if(searchInput==null){
+    //     $('input[name=period]:checked').val('');
+    // }else{
+    //     $('.search-input').val('');
+    // }
 })
 
 //판매자 상태 변경
@@ -172,8 +194,15 @@ $('.search-input').on('keydown', function (e){
         console.log('Enter');
         let searchInput = $('.search-input').val();
         let searchSelect = $('.search-dropdown').val();
-        let searchPeriod = $('input[name=period]:checked').val();
-        search.getList({period : searchPeriod, searchSelect : searchSelect, searchInput:searchInput}, showList, showError);
+        let period = $('input[name=period]:checked').val();
+
+        let searchVo ={
+            "page":page,
+            "searchInput":searchInput,
+            "searchSelect":searchSelect,
+            "period":period
+        }
+        search.getList(searchVo, showList, showError);
 
     }
 });

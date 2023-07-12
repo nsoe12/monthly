@@ -140,7 +140,7 @@ export function removeSubs(subsNumber,callback,error){
 }
 
 
-export function getList(searchVo,callback){
+export function getList(searchVo,callback,error){
     $.ajax({
         url : `/search/sellers/${searchVo.page}`,
         type : 'get',
@@ -152,7 +152,7 @@ export function getList(searchVo,callback){
                 callback(result)
             }
         },
-        error : function(a,b,c,){console.error(c)}
+        error:error
     });
 }
 

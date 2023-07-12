@@ -86,36 +86,62 @@
         SELLER_COMPANY_REGISTER_NUMBER,SELLER_STATUS,SELLER_ADDRESS2 FROM MONTHLY_SELLER
                         <where>
                             <trim prefixOverrides="AND">
-                            <if test="searchInput != ''">
-                                <if test='searchSelect.equals("seller-number")'>
-                                    SELLER_NUMBER = #{searchInput}
+                                <if test="searchVo.searchInput != ''">
+                                    <if test="'seller-number'.equals(searchVo.searchSelect)">
+                                        SELLER_NUMBER = #{searchVo.searchInput}
+                                    </if>
+                                    <if test="'seller-name'.equals(searchVo.searchSelect)">
+                                        SELLER_NAME LIKE '%' || #{searchVo.searchInput} || '%'
+                                    </if>
+                                    <if test="'seller-id'.equals(searchVo.searchSelect)">
+                                        SELLER_ID LIKE '%' || #{searchVo.searchInput} || '%'
+                                    </if>
                                 </if>
-                                <if test='searchSelect.equals("seller-name")'>
-                                    SELLER_NAME LIKE '%' || #{searchInput} || '%'
-                                </if>
-                                <if test='searchSelect.equals("seller-id")'>
-                                    SELLER_ID LIKE '%' || #{searchInput} || '%'
-                                </if>
-                            </if>
-                            <trim prefix="and">
-                                    <if test='"today".equals(period)'>
+                                <trim prefix="and">
+                                    <if test='"today".equals(searchVo.period)'>
                                         TRUNC(SELLER_REGISTER_DATE) = TRUNC(SYSDATE)
                                     </if>
-                                    <if test='"yesterday".equals(period)'>
+                                    <if test='"yesterday".equals(searchVo.period)'>
                                         TRUNC(SELLER_REGISTER_DATE) = TRUNC(SYSDATE) - 1
                                     </if>
-                            </trim>
+                                </trim>
                             </trim>
                         </where>
                         ORDER BY SELLER_REGISTER_DATE DESC
-                )S1
+                )
         <![CDATA[
-                 WHERE ROWNUM <= #{criteria.page} * #{criteria.amount}
+                 WHERE ROWNUM <= #{criteria.page} *#{criteria.amount}
              ]]>
-       )S2
-        WHERE RN > (#{criteria.page}-1) * #{criteria.amount}
+       )
+        WHERE RNUM > (#{criteria.page}-1) * #{criteria.amount}
     </select>
-
+    <select id="sellerGetTotal" resultType="_int">
+        SELECT COUNT(SELLER_NUMBER) FROM MONTHLY_SELLER
+        <where>
+            <trim prefixOverrides="AND">
+                <if test="searchVo.searchInput != ''">
+                    <if test="'seller-number'.equals(searchVo.searchSelect)">
+                        SELLER_NUMBER = #{searchVo.searchInput}
+                    </if>
+                    <if test="'seller-name'.equals(searchVo.searchSelect)">
+                        SELLER_NAME LIKE '%' || #{searchVo.searchInput} || '%'
+                    </if>
+                    <if test="'seller-id'.equals(searchVo.searchSelect)">
+                        SELLER_ID LIKE '%' || #{searchVo.searchInput} || '%'
+                    </if>
+                </if>
+                <trim prefix="and">
+                    <if test='"today".equals(searchVo.period)'>
+                        TRUNC(SELLER_REGISTER_DATE) = TRUNC(SYSDATE)
+                    </if>
+                    <if test='"yesterday".equals(searchVo.period)'>
+                        TRUNC(SELLER_REGISTER_DATE) = TRUNC(SYSDATE) - 1
+                    </if>
+                </trim>
+            </trim>
+        </where>
+        ORDER BY SELLER_REGISTER_DATE DESC
+    </select>
 <!--    <select id="selectSeller" resultType="sellerDto">-->
 <!--        SELECT * FROM MONTHLY_SELLER-->
 <!--        <where>-->
