@@ -27,9 +27,11 @@
             <ul class="wrap_ul">
               <li th:each="product, index : ${productSelect}" class="wrap_il" th:if="${product.brandNumber == brand.brandNumber}">
                 <div class="box">
+
                   <a th:href="@{/board/productInfo(productNumber=${product.productNumber})}">
                     <img th:src="'/product/upload/' + ${product.productFileUploadPath} + '/' + ${product.productFileUuid} + '_' + ${product.productFileName}" alt="" />
                   </a>
+                  <p class="mainBrandName" th:text="'['+${product.brandName}+']'"></p>
                   <p class="box_name">
                     <span th:text="${product.productName}"></span>
                   </p>

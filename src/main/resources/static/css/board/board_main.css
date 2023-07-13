@@ -71,11 +71,13 @@
     width: 300px;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 .box_name {
     font-size: 18px;
     color: #1e4a53;
-    margin-top: 15px;
+    margin-top: 8px;
     font-weight: bold;
 }
 .price {
@@ -118,4 +120,12 @@
     margin-top: 329px;
     flex-direction: row-reverse;
     margin-left: -54px;
+}
+
+
+.mainBrandName{
+    font-weight: bold;
+    color: #1e4a53;
+    margin-top: 5px;
+    font-size: 14px;
 }
