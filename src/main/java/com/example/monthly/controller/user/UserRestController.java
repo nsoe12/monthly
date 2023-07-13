@@ -6,8 +6,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @RequiredArgsConstructor
@@ -64,4 +67,44 @@ public class UserRestController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to process Kakao login information.");
         }
     }
+
+    @GetMapping("/logout")
+    public RedirectView logout(HttpServletRequest request) {
+        try {
+            // 세션 초기화
+            request.getSession().invalidate();
+
+            // 클라이언트에서 카카오 API 정보 초기화를 위한 스크립트 실행
+            String kakaoLogoutScript = "<script>\n" +
+                    "    if (Kakao.isInitialized()) {\n" +
+                    "        Kakao.Auth.logout(function () {\n" +
+                    "            console.log('Kakao API 정보 초기화 완료');\n" +
+                    "        });\n" +
+                    "    }\n" +
+                    "</script>";
+            request.setAttribute("kakaoLogoutScript", kakaoLogoutScript);
+
+            // 클라이언트에서 네이버 API 정보 초기화를 위한 스크립트 실행
+            String naverLogoutScript = "<script>\n" +
+                    "    var xhr = new XMLHttpRequest();\n" +
+                    "    xhr.open('GET', 'https://nid.naver.com/nidlogin.logout');\n" +
+                    "    xhr.onload = function () {\n" +
+                    "        console.log('Naver API 정보 초기화 완료');\n" +
+                    "    };\n" +
+                    "    xhr.send();\n" +
+                    "</script>";
+            request.setAttribute("naverLogoutScript", naverLogoutScript);
+
+            // 페이지 이동
+            return new RedirectView("/board/main");
+        } catch (Exception e) {
+            // 오류 처리
+            e.printStackTrace();
+            // 오류 페이지로 이동하거나 다른 적절한 처리를 수행할 수 있습니다.
+            return null;
+        }
+    }
+
+
+
 }

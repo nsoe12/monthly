@@ -22,7 +22,11 @@ html {
     height: 100%;
     overflow-y: scroll;
 }
-.login_a{
+#login_a{
+    color: #024b53;
+    text-decoration: none;
+}
+#logout_a{
     color: #024b53;
     text-decoration: none;
 }
