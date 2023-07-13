@@ -15,9 +15,9 @@
                 DELIVERY_ADDRESS1, DELIVERY_ADDRESS2, DELIVERY_POSTCODE, PAYMENT_PRICE, PAYMENT_STATUS,
                 PRODUCT_NAME, PRODUCT_OPTION, USER_NAME, USER_PHONE_NUMBER
                 FROM MONTHLY_PARCEL P
-                 LEFT JOIN MONTHLY_PAYMENT PM on P.PAYMENT_NUMBER = PM.PAYMENT_NUMBER
-                 LEFT JOIN MONTHLY_PRODUCT PR ON PM.PRODUCT_NUMBER = PR.PRODUCT_NUMBER AND BRAND_NUMBER = #{brandNumber}
-                 LEFT JOIN MONTHLY_USER U on PM.USER_NUMBER = U.USER_NUMBER
+                 JOIN MONTHLY_PAYMENT PM on P.PAYMENT_NUMBER = PM.PAYMENT_NUMBER
+                 JOIN MONTHLY_PRODUCT PR ON PM.PRODUCT_NUMBER = PR.PRODUCT_NUMBER AND BRAND_NUMBER = #{brandNumber}
+                 JOIN MONTHLY_USER U on PM.USER_NUMBER = U.USER_NUMBER
         <trim prefix="WHERE" prefixOverrides="AND">
             <choose>
                 <when test="'parcel-number'.equals(searchVo.searchSelect) and !''.equals(searchVo.searchInput)">
@@ -60,9 +60,9 @@
     <select id="selectParcelTotal" resultType="_int">
         SELECT COUNT(PARCEL_NUMBER)
         FROM MONTHLY_PARCEL P
-        LEFT JOIN MONTHLY_PAYMENT PM on P.PAYMENT_NUMBER = PM.PAYMENT_NUMBER
-        LEFT JOIN MONTHLY_PRODUCT PR ON PM.PRODUCT_NUMBER = PR.PRODUCT_NUMBER AND BRAND_NUMBER = #{brandNumber}
-        LEFT JOIN MONTHLY_USER U on PM.USER_NUMBER = U.USER_NUMBER
+        JOIN MONTHLY_PAYMENT PM on P.PAYMENT_NUMBER = PM.PAYMENT_NUMBER
+        JOIN MONTHLY_PRODUCT PR ON PM.PRODUCT_NUMBER = PR.PRODUCT_NUMBER AND BRAND_NUMBER = #{brandNumber}
+        JOIN MONTHLY_USER U on PM.USER_NUMBER = U.USER_NUMBER
             <trim prefix="WHERE" prefixOverrides="AND">
                 <choose>
                     <when test="'parcel-number'.equals(searchVo.searchSelect) and !''.equals(searchVo.searchInput)">
