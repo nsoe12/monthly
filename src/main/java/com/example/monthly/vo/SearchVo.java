@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Data
-
 public class SearchVo {
     private String period;
     private String searchSelect;

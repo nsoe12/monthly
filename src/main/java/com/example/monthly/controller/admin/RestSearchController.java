@@ -36,10 +36,10 @@ public class RestSearchController {
 
     //판매자 관리 페이지 기간별,조건별 전체 검색
     @GetMapping("/sellers/{page}")
-    public Map<String, Object> searchSelect( SearchVo searchVo, @PathVariable("page")int page) {
+    public Map<String, Object> searchSelect(SearchVo searchVo, @PathVariable("page") int page) {
         System.out.println("==============판매자 검색 페이징 진입==============");
         System.out.println(searchVo);
-        Criteria criteria = new Criteria(page, 15);
+        Criteria criteria = new Criteria(page, 10);
         System.out.println(criteria+"=============");
         PageVo pageVo = new PageVo(criteria, adminService.sellerGetTotal(searchVo));
         List<SellerDto> sellerList = adminService.searchSelect(searchVo, criteria);

@@ -26,7 +26,7 @@ public interface AdminMapper {
     //카테고리별 판매자 조회 검색
 //    List<SellerDto> selectSeller(SearchVo searchVo);
     List<SellerDto> selectSeller(@Param("searchVo")SearchVo searchVo, @Param("criteria")Criteria criteria);
-    int sellerGetTotal(SearchVo searchVo);
+    int sellerGetTotal(@Param("searchVo")SearchVo searchVo);
 
     //카테고리별 상품 검색
     List<ProductVo> searchProduct(SearchVo searchVo);
