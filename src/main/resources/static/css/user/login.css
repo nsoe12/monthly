@@ -27,13 +27,13 @@ html {
 
 .login-image {
   width: 70%;
-  height: 100%;
+  height: 900px;
 }
 
 .login-area {
   flex-basis: 520px;
   max-width: 1000px;
-  padding: 80px 40px;
+  padding: 40px 40px;
   display: flex;
   flex-direction: column;
   min-height: 750px;
@@ -133,7 +133,7 @@ input:focus {
   height: 56px;
   font-size: 16px;
   padding: 0 16px;
-  background-color: grey;
+  background-color: #8eb4c8;
   color: #f8f9fa;
   overflow: hidden;
   width: 85%;
@@ -231,6 +231,11 @@ li.exception::after {
   cursor: pointer;
 }
 
-.google {
-  height: 40px;
+.allLogo {
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+#allLogo_img {
+  width: 285px;
 }
