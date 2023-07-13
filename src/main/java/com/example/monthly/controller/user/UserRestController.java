@@ -86,16 +86,12 @@ public class UserRestController {
 
             // 클라이언트에서 네이버 API 정보 초기화를 위한 스크립트 실행
             String naverLogoutScript = "<script>\n" +
-                    "    var naverLogin = new naver.LoginWithNaverId({\n" +
-                    "        clientId: 'ZyZIG611nSR6a00ApfSc',\n" +
-                    "        callbackUrl: 'http://localhost:10000/board/main',\n" +
-                    "        isPopup: false,\n" +
-                    "        callbackHandle: true\n" +
-                    "    });\n" +
-                    "\n" +
-                    "    naverLogin.init();\n" +
-                    "\n" +
-                    "    naverLogin.logout();\n" +
+                    "    var xhr = new XMLHttpRequest();\n" +
+                    "    xhr.open('GET', 'http://nid.naver.com/nidlogin.logout');\n" +
+                    "    xhr.onload = function () {\n" +
+                    "        console.log('Naver API 정보 초기화 완료');\n" +
+                    "    };\n" +
+                    "    xhr.send();\n" +
                     "</script>";
             request.setAttribute("naverLogoutScript", naverLogoutScript);
 
@@ -108,4 +104,5 @@ public class UserRestController {
             return null;
         }
     }
+
 }

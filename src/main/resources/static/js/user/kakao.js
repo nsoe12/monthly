@@ -29,6 +29,7 @@ function kakaoLogin() {
                     // 서버로 userInfo 객체를 전송하는 로직을 구현
                     sendUserInfoToServer(data);
                     window.location.href = "http://localhost:10000/board/main"
+                    window.location.reload()
                 },
                 fail: function (error) {
                     console.log(error);
@@ -79,6 +80,7 @@ function sendUserInfoToServer(data) {
                     initializeKakaoAPI();
                     // 페이지 이동
                     window.location.href = "http://localhost:10000/board/main";
+                    window.location.reload()
                 },
                 fail: function (error) {
                     console.log(error);
