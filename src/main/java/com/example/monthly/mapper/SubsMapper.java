@@ -2,6 +2,7 @@ package com.example.monthly.mapper;
 
 import com.example.monthly.dto.ExSubsDto;
 import com.example.monthly.dto.ProductDto;
+import com.example.monthly.dto.SubsDto;
 import com.example.monthly.vo.SubsVo;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -28,7 +29,7 @@ public interface SubsMapper {
     void exSubsDelete(ExSubsDto exSubsDto);
 
     //내부 구독 취소
-    void subsDelete(Long productNumber);
+    void subsDelete(Long productNumber,Long userNumber);
 
     Long productSubs(ProductDto productDto);
 

@@ -51,9 +51,12 @@ public class CalenderRestController {
 
 //    내부구독 취소
     @DeleteMapping("/subsRemove")
-    public void subsRemove(@RequestBody ProductDto productDto){
+    public void subsRemove(@RequestBody ProductDto productDto, HttpServletRequest req){
         Long productNumber = mypageService.productSubs(productDto);
-        mypageService.subsRemove(productNumber);
+        Long userNumber = (Long)req.getSession().getAttribute("userNumber");
+        System.out.println(productNumber + "상품 번호=========================");
+        System.out.println(userNumber + "회원 번호=========================");
+        mypageService.subsRemove(productNumber,userNumber);
     }
 
 }

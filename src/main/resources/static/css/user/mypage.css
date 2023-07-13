@@ -304,3 +304,21 @@ table {
   white-space: normal;
   color: black;
 }
+
+.payAll{
+  display: flex;
+  justify-content: flex-end;
+  margin: 15px 0 0 0px;
+}
+
+.payText{
+  font-size: x-large;
+  font-family: "SUIT-Regular";
+}
+
+.pay{
+  font-size: x-large;
+  margin-left: 10px;
+  color: #de6868;
+  font-weight: 700;
+}
