@@ -22,6 +22,7 @@ function calSubList(callback){
               title: sub.productName + "-" + sub.productPrice + "원",
               start: new Date(startDate.getFullYear(), startDate.getMonth() + i, startDate.getDate()+1),
               end: new Date(startDate.getFullYear(), startDate.getMonth() + i, startDate.getDate()+1),
+              rendering : "bakground",
             };
 
             subList.push(recurringEvent);
@@ -57,6 +58,8 @@ function calExSubList(callback){
             start: new Date(startDate.getFullYear(), startDate.getMonth() + i, startDate.getDate()+1),
             end: new Date(startDate.getFullYear(), startDate.getMonth() + i, startDate.getDate()+1),
             color:"#FF0000",
+            backgroundColor : "#FF0000",
+            rendering : "bakground",
           };
 
           subList.push(recurringEvent);
@@ -191,8 +194,10 @@ function calenderStart(){
         }
 
       },
-      editable: true, // false로 변경 시 draggable 작동 x
+      editable: false, // false로 변경 시 draggable 작동 x
       displayEventTime: false, // 시간 표시 x
+      editable : true,
+      dayMaxEvents: true,
       datesSet: function (info) {
         var currentMonth = info.view.currentStart.getMonth();
         var currentYear = info.view.currentStart.getFullYear();
