@@ -79,7 +79,7 @@
                 </div>
                 <div class="modal-body">
                   <div class="form-group">
-                    <label  class="col-form-label">일정 내용</label>
+                    <label  class="col-form-label">구독 이름</label>
                     <input
                       type="text"
                       class="form-control"
@@ -128,9 +128,12 @@
 
         </div>
 <!--        </form>-->
-      
-      
 
+      <div class="payAll">
+        <div class="payText">이번 달 총 구독 금액 </div>
+      <div class="pay" th:text="${subsPrice+exPrice}">총 구독 액수 : 40000원</div>
+        <div style="margin-left: 5px;" class="payText">원</div>
+      </div>
 
         <!-- 구독 리스트 -->
         <div class="subList">
@@ -237,7 +240,7 @@
         <!-- 옵션 버튼 -->
         <div class="optionBtn">
           <div class="userModify">
-            <div th:text="'총 구독 금액 :' +${subsPrice+exPrice} +'원'">총 구독 액수 : 40000원</div>
+<!--            <div th:text="'총 구독 금액 :' +${subsPrice+exPrice} +'원'">총 구독 액수 : 40000원</div>-->
             <a
               class="modBtn"
               style="background-color: #8eb4c8; color: #f8f9fa;"

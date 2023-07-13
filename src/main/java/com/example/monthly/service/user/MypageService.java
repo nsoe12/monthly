@@ -68,11 +68,14 @@ public class MypageService {
     }
 
     //내부 구독 취소
-    public void subsRemove(Long productNumber){
+    public void subsRemove(Long productNumber,Long userNumber){
         if (productNumber == null) {
             throw new IllegalArgumentException("상품 이름 누락");
         }
-        subsMapper.subsDelete(productNumber);
+        if (userNumber == null) {
+            throw new IllegalArgumentException("회원 번호 누락");
+        }
+        subsMapper.subsDelete(productNumber,userNumber);
     }
 
     //내부구독을 위한 상품 검색

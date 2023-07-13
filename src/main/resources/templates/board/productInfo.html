@@ -317,7 +317,8 @@
                               class="commentInput-commentText" name="reivewContents"
                               placeholder="댓글을 입력하세요"
                             ></textarea>
-                            <div class="commentInput-buttonWrapper">
+
+                            <div class="commentInput-buttonWrapper" th:unless="${session.userNumber == null}">
                               <button
                                 class="commentInput-buttonComplete"
                                 name="register"

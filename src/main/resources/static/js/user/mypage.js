@@ -19,9 +19,10 @@ function calSubList(callback){
 
           for (let i = 0; i < 3; i++) {
             const recurringEvent = {
-              title: sub.productName + " " + sub.productPrice + "원",
+              title: sub.productName + "-" + sub.productPrice + "원",
               start: new Date(startDate.getFullYear(), startDate.getMonth() + i, startDate.getDate()+1),
               end: new Date(startDate.getFullYear(), startDate.getMonth() + i, startDate.getDate()+1),
+              rendering : "bakground",
             };
 
             subList.push(recurringEvent);
@@ -57,6 +58,8 @@ function calExSubList(callback){
             start: new Date(startDate.getFullYear(), startDate.getMonth() + i, startDate.getDate()+1),
             end: new Date(startDate.getFullYear(), startDate.getMonth() + i, startDate.getDate()+1),
             color:"#FF0000",
+            backgroundColor : "#FF0000",
+            rendering : "bakground",
           };
 
           subList.push(recurringEvent);
@@ -168,8 +171,9 @@ function calenderStart(){
 
             console.log(info.event);// Json 데이터를 받기 위한 배열 선언
             var subs = new Object();
-            let arr = info.event._def.title.split(" ");
+            let arr = info.event._def.title.split("-");
             subs.productName = arr[0];
+            console.log(arr);
             //events.push(subs);
 
             console.log(subs);
@@ -190,8 +194,10 @@ function calenderStart(){
         }
 
       },
-      editable: true, // false로 변경 시 draggable 작동 x
+      editable: false, // false로 변경 시 draggable 작동 x
       displayEventTime: false, // 시간 표시 x
+      editable : true,
+      dayMaxEvents: true,
       datesSet: function (info) {
         var currentMonth = info.view.currentStart.getMonth();
         var currentYear = info.view.currentStart.getFullYear();
