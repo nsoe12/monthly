@@ -19,9 +19,14 @@ public interface AdminMapper {
 
     public void update(SellerDto sellerDto); //판매자 상태변경
     public void updateProduct(ProductVo productVo); //상품 판매상태 변경
+    public void updateUsers(UserVo userVo); //회원 상태 변경
    public void deleteSubs(Long subsNumber);//구독취소
+
+
     //카테고리별 판매자 조회 검색
-    List<SellerDto> selectSeller(SearchVo searchVo);
+//    List<SellerDto> selectSeller(SearchVo searchVo);
+    List<SellerDto> selectSeller(@Param("searchVo")SearchVo searchVo, @Param("criteria")Criteria criteria);
+    int sellerGetTotal(@Param("searchVo")SearchVo searchVo);
 
     //카테고리별 상품 검색
     List<ProductVo> searchProduct(SearchVo searchVo);
