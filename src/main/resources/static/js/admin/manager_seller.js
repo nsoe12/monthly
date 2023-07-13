@@ -1,39 +1,21 @@
 import * as search from '../module/adminSearch.js';
 
 //모듈 경로는 일반적으로 상대경로로 접근한다.
-// let page = 1;
-// let searchInput = '';
-// let searchSelect = '';
-// let period = '';
-// $(function (){
-//     searchInput = $('.search-input').val();
-//     searchSelect = $('.search-dropdown').val();
-//     period = $('input[name="period"]:checked').val();
-//     let searchVo ={
-//         "page":page,
-//         "searchInput":searchInput,
-//         "searchSelect":searchSelect,
-//         "period":period
-//     }
-//     console.log(searchVo);
-//     search.getList(searchVo,showList,showError);
-// })
-
-// 검색 조건에 따른 회원 조회
-$('.search-btn').on('click', function (){
-    let searchInput = $('.search-input').val();
-    let searchSelect = $('.search-dropdown').val();
-    let period = $('input[name="period"]:checked').val();
-    let page = 1;
+let page = 1;
+let searchInput = '';
+let searchSelect = '';
+let period = '';
+$(function (){
+    searchInput = $('.search-input').val();
+    searchSelect = $('.search-dropdown').val();
+    period = $('input[name="period"]:checked').val();
     let searchVo ={
         "page":page,
         "searchInput":searchInput,
         "searchSelect":searchSelect,
         "period":period
     }
-    console.log('==============여기냐??========');
-    search.getList(searchVo, showList, showError);
-    console.log('==============여기냐??22222222========');
+    search.getList(searchVo,showList,showError);
 })
 
 function showList(map) {
@@ -71,7 +53,7 @@ function showList(map) {
         </tr>`;
     });
 
-    //====================
+    //====================여기 띄우는 곳인데 페이지버튼 띄우는 html view===============
     //페이지버튼
     let pageBox ='';
     if(map.pageVo.prev==true){
@@ -100,13 +82,34 @@ function showList(map) {
       `;
     }
 
-    $('.seller-list-body').html(list); //=============
+    $('.seller-list-body').html(list);
     $('.page-box').html(pageBox);
 
 }
-// search.getList({period : '', searchSelect : '', searchInput:''}, showList, showError);
+//=====================여기까지 showlist끝======================
 
-//페이징 처리 =====================================================================
+//에러 코드
+function showError(a, b, c) {
+    console.error(c);
+}
+
+
+// // 검색 조건에 따른 회원 조회
+$('.search-btn').on('click', function (){
+    searchInput = $('.search-input').val();
+    searchSelect = $('.search-dropdown').val();
+    period = $('input[name="period"]:checked').val();
+
+    let searchVo ={
+        "page":page,
+        "searchInput":searchInput,
+        "searchSelect":searchSelect,
+        "period":period
+    }
+    search.getList(searchVo, showList, showError);
+})
+
+//페이징 처리 함수=====================================================================
 //페이지버튼을 눌렀을 때
 $('.page-box').on('click','.page-num',function(){
 
@@ -165,28 +168,6 @@ $('.seller-list-body').on('click','.brand-link',function (){
     window.location.href = `/admin/subMember?sellerNumber=${sellerNumber}`;
 });
 
-//에러 코드
-function showError(a, b, c) {
-    console.error(c);
-}
-
-
-// // 검색 조건에 따른 회원 조회
-// $('.search-btn').on('click', function (){
-//     let searchInput = $('.search-input').val();
-//     let searchSelect = $('.search-dropdown').val();
-//     let period = $('input[name=period]:checked').val();
-//
-//     let searchVo ={
-//         "page":page,
-//         "searchInput":searchInput,
-//         "searchSelect":searchSelect,
-//         "period":period
-//     }
-//     console.log('==============여기냐??========');
-//     search.getList(searchVo, showList, showError);
-//     console.log('==============여기냐??22222222========');
-// })
 
 //판매자 상태 변경
 $('.seller-list-body').on('click', '.save-btn', function() {
