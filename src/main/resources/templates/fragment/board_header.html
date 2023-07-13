@@ -50,10 +50,10 @@
           <li class="allbar"></li>
 
           <li class="login_li">
-          <a class="login_a" th:if="${session.userNumber == null}" th:href="@{/user/login}">
+          <a id="login_a" th:if="${session.userNumber == null}" th:href="@{/user/login}">
             로그인
           </a>
-            <a class="login_a" th:unless="${session.userNumber == null}" th:href="@{/users/logout}">
+            <a id="logout_a" th:unless="${session.userNumber == null}" th:href="@{/users/logout}">
               로그아웃
             </a>
           </li>
@@ -144,6 +144,7 @@
 </header>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script th:src="@{/js/board/board_main.js}"></script>
+<script th:src="@{/js/user/naver.js}"></script>
 <script type="module" th:src="@{/js/board/boardproductSearch.js}"></script>
 
 </body>
