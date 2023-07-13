@@ -148,21 +148,51 @@
 
 <!--상품 검색 기능-->
     <select id="searchProduct" resultType="productVo">
-        SELECT P.PRODUCT_NUMBER, P.PRODUCT_NAME, P.PRODUCT_STATUS, B.BRAND_NAME, P.PRODUCT_REGISTER_DATE, S.SELLER_PHONE_NUMBER, S.SELLER_EMAIL, S.SELLER_NAME
-        FROM MONTHLY_PRODUCT P
+SELECT  PRODUCT_NUMBER, PRODUCT_NAME, PRODUCT_STATUS, BRAND_NAME,
+       PRODUCT_REGISTER_DATE, SELLER_PHONE_NUMBER, SELLER_EMAIL, SELLER_NAME
+    FROM(
+        SELECT ROWNUM AS RMNUM, PRODUCT_NUMBER, PRODUCT_NAME, PRODUCT_STATUS, BRAND_NAME,
+               PRODUCT_REGISTER_DATE, SELLER_PHONE_NUMBER, SELLER_EMAIL, SELLER_NAME
+        FROM (
+            SELECT PRODUCT_NUMBER, PRODUCT_NAME, PRODUCT_STATUS, BRAND_NAME,
+        PRODUCT_REGISTER_DATE, SELLER_PHONE_NUMBER, SELLER_EMAIL, SELLER_NAME
+            FROM MONTHLY_PRODUCT P
                  LEFT OUTER JOIN MONTHLY_BRAND B ON P.BRAND_NUMBER = B.BRAND_NUMBER
                  LEFT OUTER JOIN MONTHLY_SELLER S ON B.SELLER_NUMBER = S.SELLER_NUMBER
         <where>
-            <if test="searchInput != ''">
+            <if test="searchVo.searchInput != ''">
                 <choose>
-                    <when test="searchSelect == 'goods-number'">
-                        P.PRODUCT_NUMBER = #{searchInput}
+                    <when test="'goods-number'.equals(searchVo.searchSelect)">
+                        AND PRODUCT_NUMBER = #{searchVo.searchInput}
                     </when>
-                    <when test="searchSelect == 'brand-name'">
-                        B.BRAND_NAME LIKE '%' ||#{searchInput}|| '%'
+                    <when test="'brand-name'.equals(searchVo.searchSelect)">
+                        AND BRAND_NAME LIKE '%' ||#{searchVo.searchInput}|| '%'
                     </when>
-                    <when test="searchSelect == 'goods-name'">
-                        P.PRODUCT_NAME LIKE '%' || #{searchInput} || '%'
+                    <when test="'goods-name'.equals(searchVo.searchSelect)">
+                        AND PRODUCT_NAME LIKE '%' || #{searchVo.searchInput} || '%'
+                    </when>
+                </choose>
+            </if>
+        </where>
+        ORDER BY PRODUCT_NUMBER DESC )S1
+                <![CDATA[
+                     WHERE ROWNUM <= #{criteria.page}*#{criteria.amount}
+            ]]>
+    )S2
+    </select>
+    <select id="productGetTotal" resultType="_INT">
+        SELECT COUNT(PRODUCT_NUMBER) FROM MONTHLY_PRODUCT
+        <where>
+            <if test="searchVo.searchInput != ''">
+                <choose>
+                    <when test="'goods-number'.equals(searchVo.searchSelect)">
+                       AND PRODUCT_NUMBER = #{searchVo.searchInput}
+                    </when>
+                    <when test="'brand-name'.equals(searchVo.searchSelect)">
+                       AND BRAND_NAME LIKE '%' ||#{searchVo.searchInput}|| '%'
+                    </when>
+                    <when test="'goods-name'.equals(searchVo.searchSelect)">
+                       AND PRODUCT_NAME LIKE '%' || #{searchVo.searchInput} || '%'
                     </when>
                 </choose>
             </if>
@@ -172,29 +202,57 @@
 
     <!--전체 회원 조회-->
     <select id="searchUser" resultType="userVo">
-        SELECT U.USER_NUMBER,U.USER_NAME,U.USER_STATUS,U.USER_ID,U.USER_PHONE_NUMBER,S.SUBS_START_DATE,U.USER_BIRTHDAY,U.USER_EMAIL,P.PRODUCT_NAME
-        FROM MONTHLY_USER U
+SELECT USER_NUMBER,USER_NAME,USER_STATUS,USER_ID,USER_PHONE_NUMBER,
+       SUBS_START_DATE,USER_BIRTHDAY,USER_EMAIL,PRODUCT_NAME
+        FROM(
+            SELECT ROWNUM AS RNUM,USER_NUMBER,USER_NAME,USER_STATUS,USER_ID,USER_PHONE_NUMBER,
+        SUBS_START_DATE,USER_BIRTHDAY,USER_EMAIL,PRODUCT_NAME
+            FROM(
+                 SELECT U.USER_NUMBER,U.USER_NAME,U.USER_STATUS,U.USER_ID,U.USER_PHONE_NUMBER,
+                        S.SUBS_START_DATE,U.USER_BIRTHDAY,U.USER_EMAIL,P.PRODUCT_NAME
+                 FROM MONTHLY_USER U
         LEFT OUTER JOIN MONTHLY_SUBSCRIBE S ON S.USER_NUMBER =U.USER_NUMBER
         LEFT OUTER JOIN MONTHLY_PRODUCT P ON P.PRODUCT_NUMBER= S.PRODUCT_NUMBER
---         WHERE U.USER_NUMBER = 61
         <where>
-            <if test="searchInput != ''">
+            <if test="!''.equals(searchVo.searchInput)">
                 <choose>
-                    <when test="searchSelect == 'member-number'">
-                        U.USER_NUMBER = #{searchInput}
+                    <when test="'member-number'.equals(searchVo.searchSelect)">
+                        U.USER_NUMBER = #{searchVo.searchInput}
                     </when>
-                    <when test="searchSelect == 'member-name'">
-                        U.USER_NAME LIKE '%' ||#{searchInput}|| '%'
+                    <when test="'member-name'.equals(searchVo.searchSelect)">
+                        U.USER_NAME LIKE '%' ||#{searchVo.searchInput}|| '%'
                     </when>
-                    <when test="searchSelect == 'member-id'">
-                        U.USER_ID LIKE '%' || #{searchInput} || '%'
+                    <when test="'member-id'.equals(searchVo.searchSelect)">
+                        U.USER_ID LIKE '%' || #{searchVo.searchInput} || '%'
                     </when>
                 </choose>
             </if>
         </where>
-        ORDER BY U.USER_NUMBER DESC
+        ORDER BY U.USER_NUMBER DESC )
+                <![CDATA[
+                     WHERE ROWNUM <= #{criteria.page}*#{criteria.amount}
+            ]]>
+         )
     </select>
 
+    <select id="userGetTotal" resultType="_int">
+        SELECT COUNT(USER_NUMBER) FROM MONTHLY_USER
+        <where>
+            <if test="searchVo.searchInput != ''">
+                <choose>
+                    <when test="'member-number'.equals(searchVo.searchSelect)">
+                        USER_NUMBER = #{searchVo.searchInput}
+                    </when>
+                    <when test="'member-name'.equals(searchVo.searchSelect)">
+                         USER_NAME LIKE '%' ||#{searchVo.searchInput}|| '%'
+                    </when>
+                    <when test="'member-id'.equals(searchVo.searchSelect)">
+                         USER_ID LIKE '%' || #{searchVo.searchInput} || '%'
+                    </when>
+                </choose>
+            </if>
+        </where>
+    </select>
 
 
     <!--판매자의 브랜드,구독자 조회-->

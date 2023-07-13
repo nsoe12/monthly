@@ -2,20 +2,22 @@
 //이 모듈을 밖에서 사용할 수 있도록 내보내는 키워드가 export이다.
 
 //판매자 검색 기능 모듈
-// export function getList(obj, callback,error){
-//     $.ajax({
-//         url : '/search/sellers',
-//         type : 'get',
-//         data : obj,
-//         dataType : 'json',
-//         success : function(map){
-//             if(callback){
-//         callback(map);
-//             }
-//         },
-//         error : error
-//     });
-// }
+export function getList(searchVo,callback,error){
+    $.ajax({
+        url : `/search/sellers/${searchVo.page}`,
+        type : 'get',
+        data : searchVo,
+        dataType : 'json',
+        success : function(result){
+            if(callback){
+                console.log(result);
+                callback(result)
+            }
+        },
+        error:error
+    });
+}
+
 //판매자 검색후 상태변경 기능 모듈
 export function sellerStatusAjax(statusObj,error) {
     $.ajax({
@@ -30,15 +32,13 @@ export function sellerStatusAjax(statusObj,error) {
     });
 }
 //상품검색페이지 검색 모듈
-export function getProductList(pdl, callback,error){
+export function getProductList(searchVo, callback,error){
     $.ajax({
-        url : '/search/products',
+        url : `/search/products/${searchVo.page}`,
         type : 'get',
-        data :  pdl,
+        data :  searchVo,
         dataType : 'json',
-        // contentType : 'application/json; charset=utf-8',
         success : function(result){
-            console.log('ㄹㄴㅇㄹㄴㄹㅇㄹㅇㄴㄹㅋㄹㅋㄴㅇㄹ');
             console.log(result);
             if(callback){
                 callback(result);
@@ -48,15 +48,14 @@ export function getProductList(pdl, callback,error){
     });
 }
 //전체 회원 페이지 검색 모듈
-export function getUserList(ul, callback,error){
+export function getUserList(searchVo, callback,error){
     $.ajax({
-        url : '/search/users',
+        url : `/search/users/${searchVo.page}`,
         type : 'get',
-        data :  ul,
+        data :  searchVo,
         dataType : 'json',
         // contentType : 'application/json; charset=utf-8',
         success : function(result){
-            console.log('ㄹㄴㅇㄹㄴㄹㅇㄹㅇㄴㄹㅋㄹㅋㄴㅇㄹ');
             console.log(result);
             if(callback){
                 callback(result);
@@ -139,22 +138,6 @@ export function removeSubs(subsNumber,callback,error){
     });
 }
 
-
-export function getList(searchVo,callback,error){
-    $.ajax({
-        url : `/search/sellers/${searchVo.page}`,
-        type : 'get',
-        data : searchVo,
-        dataType : 'json',
-        success : function(result){
-            if(callback){
-                console.log(result);
-                callback(result)
-            }
-        },
-        error:error
-    });
-}
 
 
 

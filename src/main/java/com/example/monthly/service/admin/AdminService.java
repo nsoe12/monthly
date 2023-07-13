@@ -56,19 +56,24 @@ public Long findAdminNumber(String adminId, String adminPassword){
     }
 
 
-
-    //판매자 검색결과 조회 띄우기
-//    public List<SellerDto> selectSeller(SearchVo searchVo) {
-//        return adminMapper.selectSeller(searchVo);
-//    }
     //상품 검색결과 조회 띄우기
-    public List<ProductVo> searchProduct(SearchVo searchVo) {
-        return adminMapper.searchProduct(searchVo);
+    public List<ProductVo> searchProduct(SearchVo searchVo,Criteria criteria) {
+        return adminMapper.searchProduct(searchVo,criteria);
     }
+    public int productGetTotal(SearchVo searchVo){
+        System.out.println("=============검색할게요=======================");
+        System.out.println(searchVo);
+        return adminMapper.productGetTotal(searchVo);}
+
+
     //유저 검색결과 조회 띄우기
-    public List<UserVo> searchUser(SearchVo searchVo) {
-        return adminMapper.searchUser(searchVo);
+    public List<UserVo> searchUser(SearchVo searchVo,Criteria criteria) {
+        return adminMapper.searchUser(searchVo,criteria);
     }
+    public int userGetTotal(SearchVo searchVo){
+        System.out.println("=============검색할게요=======================");
+        System.out.println(searchVo);
+        return adminMapper.userGetTotal(searchVo);}
 
 
     //판매자에서 브랜드페이지로 이동 시 구독자 조회

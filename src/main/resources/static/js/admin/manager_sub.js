@@ -33,10 +33,13 @@ let globalProductNumber = 0;
 let globalSearchInput = '';
 
 // 검색 조건에 따른 구독자 조회
-$('.search-btn-ct').on('click', '.search-btn',function (e){
+$('.search-btn-ct').on('click', '.search-btn',function (e) {
     let productNumber = $(e.target).closest('tr').find('.product-number').text();
     let searchInput = $(e.target).closest('tr').find('.subscriber-input').text();
 
+// $('.service-name').text(productName) $(e.target).closest('tr').find('.product-number').text();;
+//let searchVo = { "productName" : productName}
+// let productName = $(e.target).closest('tr').find('.product-name').text();}
 
     globalProductNumber = productNumber;
     globalSearchInput = searchInput;
