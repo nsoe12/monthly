@@ -28,6 +28,7 @@ html {
 .login-image {
   width: 70%;
   height: 900px;
+  object-fit : cover;
 }
 
 .login-area {
