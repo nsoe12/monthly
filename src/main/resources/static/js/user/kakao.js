@@ -28,7 +28,6 @@ function kakaoLogin() {
                     };
                     // 서버로 userInfo 객체를 전송하는 로직을 구현
                     sendUserInfoToServer(data);
-                    window.location.reload()
                     window.location.href = "http://localhost:10000/board/main"
 
                 },
@@ -60,15 +59,6 @@ function sendUserInfoToServer(data) {
     xhr.send(JSON.stringify(data));
 }
 
-    // 카카오 초기화
-    function initializeKakaoAPI() {
-        Kakao.init('5fe0ebff82917c2d9a3adb0e4c01eeec'); // 발급받은 키 중 JavaScript 키를 사용
-    }
-
-// 페이지 로드 시 카카오 API 초기화 호출
-    $(document).ready(function() {
-        initializeKakaoAPI();
-    });
 
 // 카카오로그아웃
     function kakaoLogout() {
