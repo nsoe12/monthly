@@ -20,7 +20,7 @@ window.addEventListener('load', function () {
             // 유저 정보를 서버로 전송
             sendNaverUserInfoToServer(naverLogin.user);
         } else {
-            console.log("callback 처리에 실패하였습니다.");
+            console.log("네이버 계정으로 로그인 하지 않음.");
         }
     });
 });
@@ -67,32 +67,3 @@ function sendNaverUserInfoToServer(userVo) {
     // 로그인 정보 전송
     sendNaverInfo();
 }
-
-// 네이버 API 정보 초기화
-function naverLogout() {
-    // 네이버 로그아웃 호출
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', 'https://nid.naver.com/nidlogin.logout');
-    xhr.onload = function () {
-        console.log('Naver API 정보 초기화 완료');
-    };
-    xhr.send();
-}
-
-// 로그아웃 버튼 클릭 이벤트 처리
-const logoutButton = document.getElementById('logout_a');
-logoutButton.addEventListener('click', function () {
-    // 네이버 API 정보 초기화 함수 호출
-    naverLogout();
-    // 로그아웃 후 페이지 이동 등의 동작 수행
-    window.location.href = 'http://localhost:10000/board/main';
-
-    // sendNaverInfo 함수 비활성화
-    sendNaverInfo = function() {
-        console.log('sendNaverInfo function is disabled.');
-    };
-
-    // <script th:src="@{/js/user/naver.js}"></script> 코드 비활성화
-    var scriptTag = document.querySelector("script[src*='naver.js']");
-    scriptTag.remove();
-});
