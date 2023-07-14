@@ -163,8 +163,8 @@ $('.member-list-body').on('click','.save-btn',function (){
     console.log(userObj);
     console.log("==========회원상태변경 완료=========");
     search.userStatusAjax(userObj,showError);
+    window.alert([userNumber+'번 저장되었습니다']);
 });
-
 //엔터처리==================================
 $('.search-input').on('keydown', function (e){
     if(e.keyCode == 13){

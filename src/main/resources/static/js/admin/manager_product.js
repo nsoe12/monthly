@@ -151,6 +151,7 @@ $('.goods-list-body').on('click','.save-btn',function (){
     console.log(pstObj);
     console.log("==========0000000000000000000000");
     search2.productStatusAjax(pstObj,showError);
+    window.alert([productNumber+'번 상태변경 저장되었습니다']);
 });
 
 //엔터처리==================================

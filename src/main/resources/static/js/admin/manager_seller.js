@@ -180,6 +180,7 @@ $('.seller-list-body').on('click', '.save-btn', function() {
     }
     console.log(statusObj);
     search.sellerStatusAjax(statusObj,showError);
+    window.alert([sellerNumber+'번 판매자 상태변경 저장되었습니다']);
 });
 
 
