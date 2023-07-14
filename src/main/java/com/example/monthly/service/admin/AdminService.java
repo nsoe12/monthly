@@ -56,19 +56,24 @@ public Long findAdminNumber(String adminId, String adminPassword){
     }
 
 
-
-    //판매자 검색결과 조회 띄우기
-    public List<SellerDto> selectSeller(SearchVo searchVo) {
-        return adminMapper.selectSeller(searchVo);
-    }
     //상품 검색결과 조회 띄우기
-    public List<ProductVo> searchProduct(SearchVo searchVo) {
-        return adminMapper.searchProduct(searchVo);
+    public List<ProductVo> searchProduct(SearchVo searchVo,Criteria criteria) {
+        return adminMapper.searchProduct(searchVo,criteria);
     }
+    public int productGetTotal(SearchVo searchVo){
+        System.out.println("=============검색할게요=======================");
+        System.out.println(searchVo);
+        return adminMapper.productGetTotal(searchVo);}
+
+
     //유저 검색결과 조회 띄우기
-    public List<UserVo> searchUser(SearchVo searchVo) {
-        return adminMapper.searchUser(searchVo);
+    public List<UserVo> searchUser(SearchVo searchVo,Criteria criteria) {
+        return adminMapper.searchUser(searchVo,criteria);
     }
+    public int userGetTotal(SearchVo searchVo){
+        System.out.println("=============검색할게요=======================");
+        System.out.println(searchVo);
+        return adminMapper.userGetTotal(searchVo);}
 
 
     //판매자에서 브랜드페이지로 이동 시 구독자 조회
@@ -80,6 +85,17 @@ public Long findAdminNumber(String adminId, String adminPassword){
 
     //브랜드 페이지 모든 구독자 리스트 띄우기
      public List<SubsVo> productSubsUserList(SearchVo searchVo){return adminMapper.productSubsUserList(searchVo);}
+
+    //판매자페이지 검색결과 페이징처리 후 조회 (테스트중)
+    public List<SellerDto> searchSelect(SearchVo searchVo, Criteria criteria){
+        System.out.println("===============검색 productService진입==================");
+        return adminMapper.selectSeller(searchVo,criteria);
+    }
+    public int sellerGetTotal(SearchVo searchVo){
+        System.out.println("=============검색할게요=======================");
+        System.out.println(searchVo);
+          return adminMapper.sellerGetTotal(searchVo);
+    } //전체 갯수 페이징 뽑기
 
 
     //판매자 상태 변경
@@ -95,6 +111,13 @@ public Long findAdminNumber(String adminId, String adminPassword){
             throw new IllegalArgumentException("수정 정보 누락");
         }
         adminMapper.updateProduct(productVo);
+    }
+    //회원 상태 변경
+    public void memberStModify(UserVo userVo){
+        if (userVo == null) {
+            throw new IllegalArgumentException("수정 정보 누락");
+        }
+        adminMapper.updateUsers(userVo);
     }
     //구독 상태 변경
     public void remove(Long subsNumber){

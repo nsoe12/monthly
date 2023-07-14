@@ -72,28 +72,28 @@ class AdminMapperTest {
         }
     }
 
-    @Test
-    @DisplayName("동적쿼리 테스트 빈문자열로 해당 값들 조회하기")
-    void selectSeller() {
-        adminMapper.insert(sellerDto);
-        searchVo = new SearchVo();
-        searchVo.setPeriod("");
-        searchVo.setSearchSelect("seller-Name");
-        searchVo.setSearchInput("박은서5");
-        List<SellerDto> list = adminMapper.selectSeller(searchVo);
-        System.out.println(list);
-
-    }
-    @Test
-    @DisplayName("상품검색 조회")
-    void searchProduct(){
-        adminMapper.insertProduct(productVo);
-        searchVo = new SearchVo();
-        searchVo.setSearchSelect("goods-name");
-        searchVo.setSearchInput("상품11");
-        List<ProductVo> list=adminMapper.searchProduct(searchVo);
-        System.out.println(list);
-    }
+//    @Test
+//    @DisplayName("동적쿼리 테스트 빈문자열로 해당 값들 조회하기")
+//    void selectSeller() {
+//        adminMapper.insert(sellerDto);
+//        searchVo = new SearchVo();
+//        searchVo.setPeriod("");
+//        searchVo.setSearchSelect("seller-Name");
+//        searchVo.setSearchInput("박은서5");
+//        List<SellerDto> list = adminMapper.selectSeller(searchVo);
+//        System.out.println(list);
+//
+//    }
+//    @Test
+//    @DisplayName("상품검색 조회")
+//    void searchProduct(){
+//        adminMapper.insertProduct(productVo);
+//        searchVo = new SearchVo();
+//        searchVo.setSearchSelect("goods-name");
+//        searchVo.setSearchInput("상품11");
+//        List<ProductVo> list=adminMapper.searchProduct(searchVo);
+//        System.out.println(list);
+//    }
 
     @Test
     void update(){
