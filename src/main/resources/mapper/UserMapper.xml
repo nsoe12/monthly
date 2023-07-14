@@ -90,11 +90,7 @@
         WHERE USER_NUMBER = #{userNumber}
     </update>
     
-    <update id="userWithdraw">
-        UPDATE MONTHLY_USER
-        SET USER_STATUS = 0
-        WHERE USER_NUMBER = #{userNumber}
---         DELETE FROM MONTHLY_USER WHERE USER_NUMBER =#{userNumber}
-    </update>
-
+    <delete id="userWithdraw">
+        DELETE FROM MONTHLY_USER WHERE USER_NUMBER = #{userNumber}
+    </delete>
 </mapper>
