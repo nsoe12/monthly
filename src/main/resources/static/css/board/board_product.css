@@ -67,6 +67,8 @@
 }
 .product-info {
     display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .product-p {
     display: flex;
@@ -131,3 +133,8 @@ a{
 color: #378878;
 font-size: 18px;
 font-weight: bold;}
+
+.product-column{
+    width: 350px;
+    height: 416.5px;
+}
