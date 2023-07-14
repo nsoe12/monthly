@@ -109,11 +109,14 @@ public class UserController {
 
     }
 
+
+
     @GetMapping("/changeStatus")
     public RedirectView userWithdraw(HttpServletRequest req){
         Long userNumber = (Long) req.getSession().getAttribute("userNumber");
+        System.out.println(userNumber);
         userService.changeStatus(userNumber);
-        return new RedirectView("/user/login");
+        return new RedirectView("/board/main");
     }
 
 

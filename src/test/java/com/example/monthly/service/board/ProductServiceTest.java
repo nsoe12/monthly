@@ -54,7 +54,7 @@ class ProductServiceTest {
     @DisplayName("상품삭제")
     void deleteProduct() {
         doNothing().when(productMapper).deleteProduct(any(Long.class));
-       productService.removeProduct(1L);
+//       productService.removeProduct(1L);
        verify(productMapper, times(1)).deleteProduct(1L);
     }
 

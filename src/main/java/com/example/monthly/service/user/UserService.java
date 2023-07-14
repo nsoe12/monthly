@@ -104,6 +104,7 @@ public class UserService {
         if (userNumber == null) {
             throw new IllegalArgumentException("회원 번호 누락");
         }
+        System.out.println(userNumber +"service");
         userMapper.userWithdraw(userNumber);
     }
 
