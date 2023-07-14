@@ -99,7 +99,10 @@ public class SellerRestController {
         System.out.println("===============검색 restController진입=====================");
         System.out.println(searchVo);
         Long brandNumber = (Long) req.getSession().getAttribute("brandNumber");
+        System.out.println("$$$$$$$$$$%%%%%%%%%%%%%%%%$$$$$$$$$$$$$$$$");
+        System.out.println(brandNumber);
         Criteria criteria = new Criteria(page, 15);
+        System.out.println("$$$$$$$$$$$$$$$$$$$$"+ criteria);
         PageVo pageVo = new PageVo(criteria, parcelService.findParcelTotal(brandNumber, searchVo));
         List<ParcelVo> parcelList = parcelService.findParcelList(searchVo, criteria, brandNumber);
         Map<String, Object> parcelMap = new HashMap<>();
