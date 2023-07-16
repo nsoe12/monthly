@@ -1,12 +1,33 @@
 import * as search from '../module/adminSearch.js';
 
 //모듈 경로는 일반적으로 상대경로로 접근한다.
+let page = 1;
+let searchInput = '';
+let searchSelect = '';
+let period = '';
+$(function (){
+    searchInput = $('.search-input').val();
+    searchSelect = $('.search-dropdown').val();
+    period = $('input[name="period"]:checked').val();
+    let searchVo ={
+        "page":page,
+        "searchInput":searchInput,
+        "searchSelect":searchSelect,
+        "period":period
+    }
+    search.getList(searchVo,showList,showError);
+})
 
 function showList(map) {
+    if (map.sellerList.length == 0) {
+        $('.empty').removeClass('none');
+    } else {
+        $('.empty').addClass('none');}
+
     console.log(map);
     let list = '';
 
-    map.forEach(u => {
+    map.sellerList.forEach(u => {
         list += `
         <tr> <!--판매자 리스트 띄움 ajax처리 #1-->
             <td class="seller--number">${u.sellerNumber}</td>
@@ -31,11 +52,114 @@ function showList(map) {
             <td><button type="button" class="save-btn">save</button></td>
         </tr>`;
     });
-    $('.seller-list-body').html(list);
 
+    //====================여기 띄우는 곳인데 페이지버튼 띄우는 html view===============
+    //페이지버튼
+    let pageBox ='';
+    if(map.pageVo.prev==true){
+        pageBox +=`
+      <a>
+          <li class="page-num prev" value="${map.pageVo.startPage -1}>&lt</li>
+        </a>
+      `;
+    }
+    for(let i=map.pageVo.startPage; i<=map.pageVo.endPage; i++){
+        if(i==map.pageVo.criteria.page){
+            pageBox +=`
+          <a>
+          <li class="page-num active">${i}</li>
+          </a>
+          `;
+        }else{
+            pageBox +=`
+          <a><li class="page-num">${i}</li></a>
+          `;
+        }
+    }
+    if(map.pageVo.next==true){
+        pageBox +=`
+      <a><li class="page-num next" value="${map.pageVo.endPage +1}">&gt</li></a>
+      `;
+    }
+
+    $('.seller-list-body').html(list);
+    $('.page-box').html(pageBox);
 
 }
-search.getList({period : '', searchSelect : '', searchInput:''}, showList, showError);
+//=====================여기까지 showlist끝======================
+
+//에러 코드
+function showError(a, b, c) {
+    console.error(c);
+}
+
+
+// // 검색 조건에 따른 회원 조회
+$('.search-btn').on('click', function (){
+    searchInput = $('.search-input').val();
+    searchSelect = $('.search-dropdown').val();
+    period = $('input[name="period"]:checked').val();
+
+    let searchVo ={
+        "page":page,
+        "searchInput":searchInput,
+        "searchSelect":searchSelect,
+        "period":period
+    }
+    search.getList(searchVo, showList, showError);
+})
+
+//페이징 처리 함수=====================================================================
+//페이지버튼을 눌렀을 때
+$('.page-box').on('click','.page-num',function(){
+
+    if($(this).hasClass('next')){
+        return;
+    }
+    if($(this).hasClass('prev')){
+        return;
+    }
+    let page = $(this).text();
+
+    let searchVo ={
+        "page":page,
+        "searchInput":searchInput,
+        "searchSelect":searchSelect,
+        "period":period
+    }
+    search.getList(searchVo,showList,showError);
+
+});
+// 이전버튼 눌렀을 때
+$('.page-box').on('click','.prev',function(){
+    let page=$(this).val();
+    let searchVo ={
+        "page":page,
+        "searchInput":searchInput,
+        "searchSelect":searchSelect,
+        "period":period
+    }
+    search.getList(searchVo,showList,showError);
+
+});
+//다음버튼 눌렀을 때
+$('.page-box').on('click','.next',function(e){
+    e.preventDefault();
+    let page=$(this).val();
+    let searchVo ={
+        "page":page,
+        "searchInput":searchInput,
+        "searchSelect":searchSelect,
+        "period":period
+    }
+    search.getList(searchVo,showList,showError);
+
+});
+//================================================================================
+
+
+
+
 
 //구독자 페이지로 버튼 누르면 이동
 $('.seller-list-body').on('click','.brand-link',function (){
@@ -44,24 +168,6 @@ $('.seller-list-body').on('click','.brand-link',function (){
     window.location.href = `/admin/subMember?sellerNumber=${sellerNumber}`;
 });
 
-//에러 코드
-function showError(a, b, c) {
-    console.error(c);
-}
-
-
-// 검색 조건에 따른 회원 조회
-$('.search-btn').on('click', function (){
-    let searchInput = $('.search-input').val();
-    let searchSelect = $('.search-dropdown').val();
-    let searchPeriod = $('input[name=period]:checked').val();
-    search.getList({period : searchPeriod, searchSelect : searchSelect, searchInput:searchInput}, showList, showError);
-    if(searchInput==null){
-        $('input[name=period]:checked').val('');
-    }else{
-        $('.search-input').val('');
-    }
-})
 
 //판매자 상태 변경
 $('.seller-list-body').on('click', '.save-btn', function() {
@@ -74,6 +180,7 @@ $('.seller-list-body').on('click', '.save-btn', function() {
     }
     console.log(statusObj);
     search.sellerStatusAjax(statusObj,showError);
+    window.alert([sellerNumber+'번 판매자 상태변경 저장되었습니다']);
 });
 
 
@@ -86,8 +193,15 @@ $('.search-input').on('keydown', function (e){
         console.log('Enter');
         let searchInput = $('.search-input').val();
         let searchSelect = $('.search-dropdown').val();
-        let searchPeriod = $('input[name=period]:checked').val();
-        search.getList({period : searchPeriod, searchSelect : searchSelect, searchInput:searchInput}, showList, showError);
+        let period = $('input[name=period]:checked').val();
+
+        let searchVo ={
+            "page":page,
+            "searchInput":searchInput,
+            "searchSelect":searchSelect,
+            "period":period
+        }
+        search.getList(searchVo, showList, showError);
 
     }
 });

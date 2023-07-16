@@ -14,7 +14,7 @@ public class SearchVo {
     private String subscriberInput;
     private Long brandNumber;
     private Long productNumber;
-    private Long productName;
+    private String productName;
     private String productStatus; //우정 추가
     private int page; //우정추가
 
