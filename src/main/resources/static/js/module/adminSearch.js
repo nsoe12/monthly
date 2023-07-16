@@ -78,10 +78,6 @@ export function userStatusAjax(userObj,error) {
     });
 }
 
-
-
-
-
 //상품 상태변경
 export function productStatusAjax(pstObj,error){
     $.ajax({
@@ -96,24 +92,16 @@ export function productStatusAjax(pstObj,error){
     });
 }
 
-
-
-
-
-
-
 //=============================================================
-
-
 //판매자의 구독자 페이지 검색 후 구독자 리스트 모듈
-export function productSubsUserList(psl,callback,error){
+export function productSubsUserList(searchVo,callback,error){
     $.ajax({
-        url : '/search/subs',
+        url : `/search/subs/${searchVo.page}`,
         type : 'get',
-        data :  psl,
+        data :  searchVo,
         dataType : 'json',
         success : function(result){
-            console.log('검색~~~~~ 드러가기');
+            console.log('ajax서버연결 진입');
             console.log(result);
             if(callback){
                 callback(result);

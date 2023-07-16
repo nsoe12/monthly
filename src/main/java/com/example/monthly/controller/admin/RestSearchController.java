@@ -76,12 +76,18 @@ public class RestSearchController {
 
 
     //===========구독자 페이지===============
-
-    @GetMapping("/subs")
-    public List<SubsVo> productSubsUserList(SearchVo searchVo, Model model) {
-        System.out.println("=========000000000===========");
+    @GetMapping("/subs/{page}")
+    public Map<String, Object> productSubsUserList(SearchVo searchVo, @PathVariable("page") int page) {
+        System.out.println("=========구독자 레스트 진입===========");
         System.out.println(searchVo);
-        return adminService.productSubsUserList(searchVo);
+        Criteria criteria = new Criteria(page, 7);
+        PageVo pageVo = new PageVo(criteria, adminService.subsGetTotal(searchVo));
+        List<SubsVo> subsList = adminService.productSubsUserList(searchVo, criteria);
+        System.out.println("===============구독자 페이징 레스트 완료=============");
+        Map<String, Object> subsMap = new HashMap<>();
+        subsMap.put("pageVo",pageVo);
+        subsMap.put("subsList",subsList);
+        return subsMap;
     }
 
     //구독자 삭제

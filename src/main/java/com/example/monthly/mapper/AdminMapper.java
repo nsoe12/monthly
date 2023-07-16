@@ -41,8 +41,8 @@ public interface AdminMapper {
     List<ProductVo> brandName(Long sellerNumber);
 
     //판매자 이동 후 상품별 구독자 정보 가져오기 #3
-    List<SubsVo> productSubsUserList(SearchVo searchVo);
-
+    List<SubsVo> productSubsUserList(@Param("searchVo")SearchVo searchVo,@Param("criteria")Criteria criteria);
+    int subsGetTotal(@Param("searchVo")SearchVo searchVo);
 
     List<AdminChartVo> sellerApplication();
     List<AdminChartVo> paymentCount();
