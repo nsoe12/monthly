@@ -16,6 +16,7 @@ body{
 /* 섹션2개 전체..레이아웃 */
 .main-section{
   margin-top: 30px;
+  padding-bottom: 50px;
 }
 .main-container{
   width: 80%;
@@ -117,12 +118,12 @@ button{
 /*회원관리 리스트테이블 */
 .goods-list-head>tr>th{
   background-color: #dce8ee;
-  font-size: 11px;
+  font-size: 14px;
   align-content: center;
 }
 
 .goods-list-body>tr>td{
-  font-size: 9px;  
+  font-size: 12px;
   text-align: center;
   padding: 10px;
 }
@@ -142,9 +143,45 @@ button{
 
 
 
-/*상품 없을 때*/
-.none-subscriber>h3{
-  text-align: center;
-  margin: 5px;
+/*판매자신청 없을 때*/
+/* 검색 결과 없을 때 */
+.empty{
+  margin-top: 30px;
+  box-sizing: border-box;
+  border: 1px solid #8eb4c8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+}
+.none{
   display: none;
+}
+
+
+/*페이징*/
+.page-container{
+  margin-top:30px;
+}
+.page-box{
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.page-num{
+  border: 1px solid #dce8ee;
+  width : 30px;
+  height: 40px;
+  border-radius: 5px;
+  margin: 0 10px;
+  text-align: center;
+  line-height: 40px;
+  color: white;
+  background-color:#dce8ee;
+  cursor:pointer;
+}
+.active,
+.page-num:hover{
+  background-color: #8eb4c8;
 }
