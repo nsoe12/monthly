@@ -1,5 +1,5 @@
 var naverLogin = new naver.LoginWithNaverId({
-    clientId: "ZyZIG611nSR6a00ApfSc",
+    clientId: "O27ouSjAAkb60HR7Suj6",
     callbackUrl: "http://localhost:10000/board/main",
     isPopup: false,
     callbackHandle: true
