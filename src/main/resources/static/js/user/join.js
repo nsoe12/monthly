@@ -204,9 +204,14 @@ function checkAllAgree() {
   return allChecked;
 }
 
-// 회원가입 버튼 활성화/비활성화 처리
 function toggleSubmitButton() {
-  if (checkAllAgree() && isInfoVisible()) {
+  const isGenderSelected = maleRadio.checked || femaleRadio.checked; // 성별 라디오 버튼 체크 여부 확인
+  const yearSelect = document.querySelector(".member-birth-year");
+  const monthSelect = document.querySelector(".member-birth-month");
+  const daySelect = document.querySelector(".member-birth-day");
+  const isBirthdayValid = yearSelect.value && monthSelect.value && daySelect.value;
+
+  if (isGenderSelected && checkAllAgree() && isInfoVisible() && isBirthdayValid) {
     noSubmitButton.style.display = "none";
     submitButton.style.display = "inline-block";
   } else {
