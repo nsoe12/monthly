@@ -40,7 +40,6 @@ function showList(map) {
               </td>
               <td>${u.userId}</td>
               <td>${u.userPhoneNumber}</td>
-              <td>${u.subsStartDate}</td>
               <td>${u.userBirthday}</td>
               <td>${u.userEmail}</td>
               <td><button type="button" class="save-btn">save</button></td>
