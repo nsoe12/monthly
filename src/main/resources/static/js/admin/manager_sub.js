@@ -197,20 +197,15 @@ $('.sub-list-body').on('click','.out-btn',function (){
 
 
 
-
+// 버튼 클릭시 문자전송~~~~~~~~
 $('.sub-list-body').on('click','.message-submit-btn',function (){
-    let phoneNumber = $('.message-submit-btn').data('phone'); // 전화번호 가져오기
-    console.log(phoneNumber+"============");
+    console.log(this);
+    let phoneNumber = $(this).data('phone').replace(/-/g,""); // 전화번호 가져오기
+    /*phoneNumber.replace(/[^0-9]/g, '').replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);*/// 숫자를 제외한 모든 문자 제거
+    console.log(phoneNumber);
     sendSMS(phoneNumber);
 });
 
-//버튼 클릭 시 문자 보내기
-// $(document).ready(function() {
-//     $('.message-submit-btn').click(function() {
-//         let phoneNumber = $(this).data('phone'); // 전화번호 가져오기
-//         sendSMS(phoneNumber);
-//     });
-// });
 function sendSMS(phoneNumber) {
     // 암호화된 accessKey와 secretKey
     let accessKey = 'accessKey';
@@ -245,6 +240,7 @@ function sendSMS(phoneNumber) {
             'X-NCP-service-secret': secretKey
         },
         success: function(data) {
+            alert('전송되었습니다.');
             console.log('SMS 전송 성공');
         },
         error: function(error) {
