@@ -116,7 +116,7 @@ public class UserController {
         Long userNumber = (Long) req.getSession().getAttribute("userNumber");
         System.out.println(userNumber);
         userService.changeStatus(userNumber);
-        return new RedirectView("/board/main");
+        return new RedirectView("/users/logout");
     }
 
 
