@@ -76,13 +76,13 @@
 <!--판매자 검색 기능-->
     <select id="selectSeller" resultType="sellerDto">
         SELECT SELLER_NUMBER, SELLER_NAME, SELLER_ID, SELLER_PASSWORD, SELLER_PHONE_NUMBER,SELLER_ADDRESS1,
-               SELLER_EMAIL, SELLER_CONTENTS,
+               SELLER_EMAIL, SELLER_CONTENTS,SELLER_REGISTER_DATE,
                SELLER_COMPANY_REGISTER_NUMBER,SELLER_STATUS,SELLER_ADDRESS2
         FROM(SELECT ROWNUM AS RNUM,SELLER_NUMBER, SELLER_NAME, SELLER_ID, SELLER_PASSWORD, SELLER_PHONE_NUMBER,SELLER_ADDRESS1,
-               SELLER_EMAIL, SELLER_CONTENTS,
+               SELLER_EMAIL, SELLER_CONTENTS,SELLER_REGISTER_DATE,
                SELLER_COMPANY_REGISTER_NUMBER,SELLER_STATUS,SELLER_ADDRESS2
         FROM(SELECT SELLER_NUMBER, SELLER_NAME, SELLER_ID, SELLER_PASSWORD, SELLER_PHONE_NUMBER,SELLER_ADDRESS1,
-        SELLER_EMAIL, SELLER_CONTENTS,
+        SELLER_EMAIL, SELLER_CONTENTS,SELLER_REGISTER_DATE,
         SELLER_COMPANY_REGISTER_NUMBER,SELLER_STATUS,SELLER_ADDRESS2 FROM MONTHLY_SELLER
                         <where>
                             <trim prefixOverrides="AND">
@@ -206,32 +206,30 @@ SELECT  PRODUCT_NUMBER, PRODUCT_NAME, PRODUCT_STATUS, BRAND_NAME,
     <!--전체 회원 조회-->
     <select id="searchUser" resultType="userVo">
 SELECT USER_NUMBER,USER_NAME,USER_STATUS,USER_ID,USER_PHONE_NUMBER,
-       SUBS_START_DATE,USER_BIRTHDAY,USER_EMAIL,PRODUCT_NAME
+       USER_BIRTHDAY,USER_EMAIL
         FROM(
             SELECT ROWNUM AS RNUM,USER_NUMBER,USER_NAME,USER_STATUS,USER_ID,USER_PHONE_NUMBER,
-        SUBS_START_DATE,USER_BIRTHDAY,USER_EMAIL,PRODUCT_NAME
+        USER_BIRTHDAY,USER_EMAIL
             FROM(
-                 SELECT U.USER_NUMBER,U.USER_NAME,U.USER_STATUS,U.USER_ID,U.USER_PHONE_NUMBER,
-                        S.SUBS_START_DATE,U.USER_BIRTHDAY,U.USER_EMAIL,P.PRODUCT_NAME
-                 FROM MONTHLY_USER U
-        LEFT OUTER JOIN MONTHLY_SUBSCRIBE S ON S.USER_NUMBER =U.USER_NUMBER
-        LEFT OUTER JOIN MONTHLY_PRODUCT P ON P.PRODUCT_NUMBER= S.PRODUCT_NUMBER
+                 SELECT USER_NUMBER,USER_NAME,USER_STATUS,USER_ID,USER_PHONE_NUMBER,
+                        USER_BIRTHDAY,USER_EMAIL
+                 FROM MONTHLY_USER
         <where>
             <if test="!''.equals(searchVo.searchInput)">
                 <choose>
                     <when test="'member-number'.equals(searchVo.searchSelect)">
-                        U.USER_NUMBER = #{searchVo.searchInput}
+                        USER_NUMBER = #{searchVo.searchInput}
                     </when>
                     <when test="'member-name'.equals(searchVo.searchSelect)">
-                        U.USER_NAME LIKE '%' ||#{searchVo.searchInput}|| '%'
+                        USER_NAME LIKE '%' ||#{searchVo.searchInput}|| '%'
                     </when>
                     <when test="'member-id'.equals(searchVo.searchSelect)">
-                        U.USER_ID LIKE '%' || #{searchVo.searchInput} || '%'
+                        USER_ID LIKE '%' || #{searchVo.searchInput} || '%'
                     </when>
                 </choose>
             </if>
         </where>
-        ORDER BY U.USER_NUMBER DESC )S1
+        ORDER BY USER_NUMBER DESC )S1
                 <![CDATA[
                      WHERE ROWNUM <= #{criteria.page}*#{criteria.amount}
             ]]>
@@ -239,20 +237,18 @@ SELECT USER_NUMBER,USER_NAME,USER_STATUS,USER_ID,USER_PHONE_NUMBER,
     </select>
 
     <select id="userGetTotal" resultType="_int">
-        SELECT COUNT(U.USER_NUMBER) FROM MONTHLY_USER U
-        LEFT OUTER JOIN MONTHLY_SUBSCRIBE S ON S.USER_NUMBER =U.USER_NUMBER
-        LEFT OUTER JOIN MONTHLY_PRODUCT P ON P.PRODUCT_NUMBER= S.PRODUCT_NUMBER
+        SELECT COUNT(USER_NUMBER) FROM MONTHLY_USER
         <where>
             <if test="!''.equals(searchVo.searchInput)">
                 <choose>
                     <when test="'member-number'.equals(searchVo.searchSelect)">
-                        U.USER_NUMBER = #{searchVo.searchInput}
+                        USER_NUMBER = #{searchVo.searchInput}
                     </when>
                     <when test="'member-name'.equals(searchVo.searchSelect)">
-                         U.USER_NAME LIKE '%' ||#{searchVo.searchInput}|| '%'
+                         USER_NAME LIKE '%' ||#{searchVo.searchInput}|| '%'
                     </when>
                     <when test="'member-id'.equals(searchVo.searchSelect)">
-                         U.USER_ID LIKE '%' || #{searchVo.searchInput} || '%'
+                         USER_ID LIKE '%' || #{searchVo.searchInput} || '%'
                     </when>
                 </choose>
             </if>

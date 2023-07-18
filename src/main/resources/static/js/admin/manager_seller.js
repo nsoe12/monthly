@@ -41,7 +41,7 @@ function showList(map) {
             </td>
             <td>${u.sellerId}</td>
             <td>${u.sellerPhoneNumber}</td>
-            <td>${u.sellerRegisterDate}</td>
+          <td>${u.sellerRegisterDate}</td>
             <td>${u.sellerCompanyRegisterNumber}</td>
             <td>${u.sellerEmail}</td>
             <td>${u.sellerAddress1}</td>
