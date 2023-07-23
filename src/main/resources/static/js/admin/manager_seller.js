@@ -34,9 +34,9 @@ function showList(map) {
             <td>${u.sellerName}</td>
             <td>
                 <select name="parcel-status"  class="parcel-status">
-                    <option value="1" ${1==u.sellerStatus ? `selected="selected"`:''}  >영업신청</option>
-                    <option value="2" ${2==u.sellerStatus ? `selected="selected"`:''}>영업허가</option>
-                    <option value="0" ${0==u.sellerStatus ? `selected="selected"`:''}>폐업</option>
+                    <option value="1" ${1==u.sellerStatus ? `selected="selected"`:''}  >영업허가</option>
+                    <option value="2" ${2==u.sellerStatus ? `selected="selected"`:''}>폐업</option>
+                    <option value="0" ${0==u.sellerStatus ? `selected="selected"`:''}>영업신청</option>
                 </select>
             </td>
             <td>${u.sellerId}</td>
