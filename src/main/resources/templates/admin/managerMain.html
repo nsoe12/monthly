@@ -34,7 +34,7 @@
               </thead>
               <tbody>
               <tr th:each="status : ${sellerStatus}">
-                <th th:text="${status.brandRegisterDate}"></th>
+                <th th:text="${status.sellerRegisterDate}"></th>
                 <td th:text="${status.sellerStatusOneCount + '건'}"></td>
                 <td th:text="${status.sellerStatusTwoCount + '건'}"></td>
               </tr>
