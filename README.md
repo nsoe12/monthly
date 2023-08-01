@@ -29,7 +29,7 @@ SpringProject
 구독서비스를 기반으로 추후 플랫폼의 사업 확장 가능성
 
 ## ERD구성
-![monthly ERD 구성](https://github.com/yeon0517/monthly/assets/112221690/729c11d3-08b9-4ecd-be1b-ae06f1b25c47)
+![monthly ERD 구성] https://github.com/nsoe12/monthly/blob/a40527b6f361c3820ca2868f22e5bebd9cbf1726/erd.png
 
 
 ### 😉 나의 역할 <br/>
