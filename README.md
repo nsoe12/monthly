@@ -1,7 +1,7 @@
 # 팀명 : 구독과 좋아요 
 SpringProject
 
-# 프로젝트 이름 :monthly
+# 프로젝트 이름 : Monthly
 ## 팀 구성
 
 |팀장|정우정|           
