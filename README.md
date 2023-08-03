@@ -85,7 +85,7 @@ ORM : Mybatis
 ● 브랜드 등록 <br/>
 ● 제품 등록 <br/> 
 
-관리자 페이지 [관리자 WIKI 이동](여기에 링크 넣기) <br/>
+관리자 페이지 [관리자 WIKI 이동](https://github.com/nsoe12/monthly/wiki/1.%ED%8C%90%EB%A7%A4%EC%9E%90-%ED%8E%98%EC%9D%B4%EC%A7%80(%EA%B4%80%EB%A6%AC%EC%9E%90)) <br/>
 ● 관리자 로그인 <br/>
 ● 회원관리, 구독자 관리, 모든 제품관리, 매출 관리, 판매자 관리<br/>
 ● 구독 문자 알림 서비스
